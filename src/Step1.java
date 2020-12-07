@@ -23,7 +23,11 @@ public class Step1 {
             }
         }
         if ((direction.equalsIgnoreCase("r") && num > 0) || (direction.equalsIgnoreCase("l") && num < 0)) {
-
+            for (int i = 0; i < Math.abs(num); i++) {
+                String tem = word.get(word.size() - 1);
+                word.remove(word.size() - 1);
+                word.add(0, tem);
+            }
         }
     }
 }
