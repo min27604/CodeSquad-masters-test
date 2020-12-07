@@ -29,5 +29,9 @@ public class Step1 {
                 word.add(0, tem);
             }
         }
+
+        for (String s : word) {
+            System.out.print(s);
+        }
     }
 }
