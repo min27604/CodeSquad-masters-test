@@ -14,5 +14,16 @@ public class Step1 {
         List<String> word = new ArrayList<>(Arrays.asList(temp[0].split("")));
         int num = Integer.parseInt(temp[1]);
         String direction = temp[2];
+
+        if ((direction.equalsIgnoreCase("l") && num > 0) || (direction.equalsIgnoreCase("r") && num < 0)) {
+            for (int i = 0; i < Math.abs(num); i++) {
+                String tem = word.get(0);
+                word.remove(0);
+                word.add(tem);
+            }
+        }
+        if ((direction.equalsIgnoreCase("r") && num > 0) || (direction.equalsIgnoreCase("l") && num < 0)) {
+
+        }
     }
 }
