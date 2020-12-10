@@ -1,7 +1,62 @@
-## Step 1
-1. 받은 인풋을 스페이스 기준으로 나누어 temp 어레이에 임시 보관
-2. 변수를 선언하고 temp 에 있는 값을 하나씩 지정. word 는 알파벳의 이동이 필요, 리스트에 알파벳 하나하나 저장 
-3. direction 값과 num 값의 양/음수 여부를 가지고 조건문 두가 생성
-4. direction: "L", num > 0 일 경우와 direction: "R', num < 0 인 경우 두 가지는 앞의 알파벳이 뒤로 밀리므로 인덱스 0의 값을 tem 변수에 저장 후 remove 메소드를 이용해 삭제, 인덱스 값이 앞으로 당겨짐. tem 에 저장해둔 값은 add 메소드를 이용해 리스트 제일 끝 인덱스 자리에 넣어줌
-5. direction: "R", num > 0 일 경우와 direction: "L", num < 0 인 경우 두 가지는 뒤의 알파벳이 앞으로 밀리므로 word 의 사이즈값을 이용, 마지막 인덱스 값을 4번에서 쓴 방법과 같이 tem 에 임시 저장 후 삭제, add 메소드를 이용해 앞으로 이동
-6. 새로 저장된 단어를 출력    
+## Step 2
+
+1. 큐브를 출력해 줄 printCube 메소드
+    - 큐브는 더블 어레이를 사용, 이중 for loop을 이용해 윗줄부터 차례대로 출력해준다.
+2. takeInputs 메소드에서 스캐너를 이용해 인풋을 저장한다. 인풋이 "Q" 라면 init 메소드에서 걸러져 프로그램이 종료된다.
+3. 저장된 인풋에 따라 방향을 정하고 큐브를 움직여준다(moveCube)
+    - input을 한 글자씩 떼어내 direction에 저장한다. 떼어낸 자리 다음 자리값에 작은 따옴표가 있다면 이것도 같이 direction에 저장한다.
+
+    ```
+    String direction = "";
+    if (inputs.charAt(i) == '\'') {
+        continue;
+    }
+    direction += inputs.charAt(i);
+
+    if ((i != inputs.length() - 1) && (inputs.charAt(i + 1) == '\'')) {
+        direction += "'";
+    }
+    ```
+
+    - 해당 direction을 먼저 한 번 출력해 준 다음 matchDirection에 넣어 주어진 방향대로 움직여 줄 메소드를 매치시켜준다.
+
+    ```
+    switch (direction) {
+        case "U":
+            moveLeft(0);
+            break;
+        case "U'":
+            moveRight(0);
+            break;
+        case "R":
+            moveUp(2);
+            break;
+        case "R'":
+            moveDown(2);
+            break;
+        case "L":
+            moveDown(0);
+            break;
+        case "L'":
+            moveUp(0);
+            break;
+        case "B":
+            moveRight(2);
+            break;
+        case "B'":
+            moveLeft(2);
+            break;
+    }
+    ```
+
+    - 큐브를 움직여주는 메소드의 예
+
+    ```
+    private void moveLeft(int index) {
+        String temp = cube[index][0];
+        for (int i = 0; i < cube[index].length - 1; i++) {
+            cube[index][i] = cube[index][i + 1];
+        }
+        cube[index][cube[index].length - 1] = temp;
+    }
+    ```
