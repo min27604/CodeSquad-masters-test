@@ -1,62 +1,59 @@
 import java.util.Scanner;
 
-public class Step2 {
+public class Cube {
     String[][] cube = {{"R", "R", "W"}, {"G", "C", "W"}, {"G", "B", "B"}};
-    String input;
-    boolean running;
+    String inputs;
 
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Step2 step = new Step2();
-        step.init(in);
+    public Cube() {
+        init();
     }
 
-    public void printCube(String[][] arr) {
-        for (String[] strings : arr) {
-            for (String string : strings) {
-                System.out.print(string + " ");
+    public void init() {
+        printCube();
+        while (true) {
+            takeInputs();
+            if (inputs.equals("Q")) {
+                System.out.println("Bye~");
+                break;
+            }
+            moveCube();
+        }
+    }
+
+    private void printCube() {
+        for (int i = 0; i < cube.length; i++) {
+            for (int j = 0; j < cube[i].length; j++) {
+                System.out.print(cube[i][j] + " ");
             }
             System.out.println();
         }
         System.out.println();
     }
 
-    public void init(Scanner in) {
-        printCube(cube);
-        running = true;
-        while (running) {
-            setInput(in);
-            moveCube();
-        }
-    }
-
-    public void setInput(Scanner in) {
+    private void takeInputs() {
         System.out.print("CUBE> ");
-        input = in.nextLine();
-        if (input.equalsIgnoreCase("Q")) {
-            System.out.println("Bye~");
-            running = false;
-        }
+        Scanner sc = new Scanner(System.in);
+        inputs = sc.nextLine();
     }
 
-    public void moveCube() {
-        for (int i = 0; i < input.length(); i++) {
+    private void moveCube() {
+        for (int i = 0; i < inputs.length(); i++) {
             String direction = "";
-            if (input.charAt(i) == '\'') {
+            if (inputs.charAt(i) == '\'') {
                 continue;
             }
-            direction += input.charAt(i);
+            direction += inputs.charAt(i);
 
-            if ((i != input.length() - 1) && (input.charAt(i + 1) == '\'')) {
+            if ((i != inputs.length() - 1) && (inputs.charAt(i + 1) == '\'')) {
                 direction += "'";
             }
             System.out.println(direction);
             matchDirection(direction);
-            printCube(cube);
+            printCube();
         }
     }
 
-    public void matchDirection(String direction) {
+    private void matchDirection(String direction) {
         switch (direction) {
             case "U":
                 moveLeft(0);
@@ -85,7 +82,7 @@ public class Step2 {
         }
     }
 
-    public void moveLeft(int index) {
+    private void moveLeft(int index) {
         String temp = cube[index][0];
         for (int i = 0; i < cube[index].length - 1; i++) {
             cube[index][i] = cube[index][i + 1];
@@ -93,7 +90,7 @@ public class Step2 {
         cube[index][cube[index].length - 1] = temp;
     }
 
-    public void moveRight(int index) {
+    private void moveRight(int index) {
         String temp = cube[index][cube[index].length - 1];
         for (int i = cube[index].length - 1; i > 0; i--) {
             cube[index][i] = cube[index][i - 1];
@@ -101,7 +98,7 @@ public class Step2 {
         cube[index][0] = temp;
     }
 
-    public void moveUp(int index) {
+    private void moveUp(int index) {
         String temp = cube[0][index];
         for (int i = 0; i < cube.length - 1; i++) {
             cube[i][index] = cube[i + 1][index];
@@ -109,7 +106,7 @@ public class Step2 {
         cube[cube.length - 1][index] = temp;
     }
 
-    public void moveDown(int index) {
+    private void moveDown(int index) {
         String temp = cube[cube.length - 1][index];
         for (int i = cube.length - 1; i > 0; i--) {
             cube[i][index] = cube[i - 1][index];
@@ -117,4 +114,3 @@ public class Step2 {
         cube[0][index] = temp;
     }
 }
-
