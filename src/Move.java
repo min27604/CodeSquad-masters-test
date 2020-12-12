@@ -35,7 +35,7 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] frontReverse() {
+    static String[][][] frontReverse() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[0][2][i] = cb.cube[3][i][0];
@@ -48,7 +48,7 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] left() {
+    static String[][][] left() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[2][i][0] = cb.cube[0][i][0];
@@ -61,7 +61,7 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] leftReverse() {
+    static String[][][] leftReverse() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[0][i][0] = cb.cube[2][i][0];
@@ -74,7 +74,7 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] right() {
+    static String[][][] right() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[4][i][0] = cb.cube[0][2 - i][2];
@@ -87,11 +87,11 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] rightReverse() {
+    static String[][][] rightReverse() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[0][i][2] = cb.cube[4][2 - i][0];
-            tempCube[4][i][0] = cb.cube[5][2 - i][0];
+            tempCube[4][i][0] = cb.cube[5][2 - i][2];
             tempCube[5][i][2] = cb.cube[2][i][2];
             tempCube[2][i][2] = cb.cube[0][i][2];
         }
@@ -100,12 +100,12 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] back() {
+    static String[][][] back() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[1][i][0] = cb.cube[0][0][2 - i];
-            tempCube[0][2][i] = cb.cube[1][i][0];
-            tempCube[3][i][2] = cb.cube[0][2][2 - i];
+            tempCube[5][2][i] = cb.cube[1][i][0];
+            tempCube[3][i][2] = cb.cube[5][2][2 - i];
             tempCube[0][0][i] = cb.cube[3][i][2];
         }
         rotateClockwise(4);
@@ -113,12 +113,12 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] backReverse() {
+    static String[][][] backReverse() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
-            tempCube[0][0][i] = cb.cube[i][2 - i][0];
-            tempCube[1][i][0] = cb.cube[0][2][i];
-            tempCube[0][2][i] = cb.cube[3][2 - i][2];
+            tempCube[0][0][i] = cb.cube[1][2 - i][0];
+            tempCube[1][i][0] = cb.cube[5][2][i];
+            tempCube[5][2][i] = cb.cube[3][2 - i][2];
             tempCube[3][i][2] = cb.cube[0][0][i];
         }
         rotateCounterClockwise(4);
@@ -126,11 +126,11 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] up() {
+    static String[][][] up() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
-            tempCube[3][i][0] = cb.cube[4][0][2 - i];
-            tempCube[2][0][i] = cb.cube[3][2 - i][0];
+            tempCube[3][0][i] = cb.cube[4][0][i];
+            tempCube[2][0][i] = cb.cube[3][0][i];
             tempCube[1][0][i] = cb.cube[2][0][i];
             tempCube[4][0][i] = cb.cube[1][0][i];
         }
@@ -139,11 +139,11 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] upReverse() {
+    static String[][][] upReverse() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
-            tempCube[4][0][i] = cb.cube[3][2 - i][0];
-            tempCube[3][i][0] = cb.cube[2][0][2 - i];
+            tempCube[4][0][i] = cb.cube[3][0][i];
+            tempCube[3][0][i] = cb.cube[2][0][i];
             tempCube[2][0][i] = cb.cube[1][0][i];
             tempCube[1][0][i] = cb.cube[4][0][i];
         }
@@ -152,7 +152,7 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] down() {
+    static String[][][] down() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[3][2][i] = cb.cube[2][2][i];
@@ -165,7 +165,7 @@ public class Move {
         return cb.cube;
     }
 
-    private static String[][][] downReverse() {
+    static String[][][] downReverse() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[2][2][i] = cb.cube[3][2][i];
