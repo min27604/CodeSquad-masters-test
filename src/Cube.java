@@ -15,9 +15,15 @@ public class Cube {
     void start() {
         Instant start = Instant.now();
         printer.printCube(cube);
+        System.out.println("큐브를 섞으시려면 SHUFFLE, 종료하시려면 Q를 입력해주세요.");
         while (true) {
             takeInputs();
-            if (input.equals("Q")) {
+            if (input.equalsIgnoreCase("SHUFFLE")) {
+                shuffle();
+                printer.printCube(cube);
+                continue;
+            }
+            if (input.equalsIgnoreCase("Q")) {
                 Instant end = Instant.now();
                 Timer.printTimeElapsed(start, end);
                 System.out.println("조작갯수: " + counter);
@@ -25,6 +31,17 @@ public class Cube {
                 break;
             }
             getDirection();
+        }
+    }
+
+    void shuffle() {
+        Shuffle.shuffleCube();
+        for (int i = 0; i < cube.length; i++) {
+            for (int j = 0; j < cube[i].length; j++) {
+                for (int k = 0; k < cube[i][j].length; k++) {
+                    cube[i][j][k] = Shuffle.shuffledCube[i][j][k];
+                }
+            }
         }
     }
 
