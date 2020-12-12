@@ -22,7 +22,7 @@ public class Move {
         }
     }
 
-    private static String[][][] front() {
+    static String[][][] front() {
         setTempCube();
         for (int i = 0; i < 3; i++) {
             tempCube[3][i][0] = cb.cube[0][2][i];

@@ -1,16 +1,17 @@
 import java.util.Scanner;
 
 public class Cube {
-    String[][][] cube = {{{"W", "W", "W"}, {"W", "W", "W"}, {"W", "W", "W"}},
-            {{"O", "O", "O"}, {"O", "O", "O"}, {"O", "O", "O"}}, {{"G", "G", "G"}, {"G", "G", "G"}, {"G", "G", "G"}},
-            {{"R", "R", "R"}, {"R", "R", "R"}, {"R", "R", "R"}}, {{"B", "B", "B"}, {"B", "B", "B"}, {"B", "B", "B"}},
-            {{"Y", "Y", "Y"}, {"Y", "Y", "Y"}, {"Y", "Y", "Y"}}};
+    String[][][] cube;
     CubePrinter printer = new CubePrinter();
     Scanner sc = new Scanner(System.in);
     String input;
     int counter;
 
     public Cube() {
+        this.cube = new String[][][] {{{"W", "W", "W"}, {"W", "W", "W"}, {"W", "W", "W"}},
+                {{"O", "O", "O"}, {"O", "O", "O"}, {"O", "O", "O"}}, {{"G", "G", "G"}, {"G", "G", "G"}, {"G", "G", "G"}},
+                {{"R", "R", "R"}, {"R", "R", "R"}, {"R", "R", "R"}}, {{"B", "B", "B"}, {"B", "B", "B"}, {"B", "B", "B"}},
+                {{"Y", "Y", "Y"}, {"Y", "Y", "Y"}, {"Y", "Y", "Y"}}};
         start();
     }
 
@@ -47,6 +48,17 @@ public class Cube {
             }
 
             System.out.println(direction + "\n");
+            moveCube(direction);
+            counter++;
+        }
+    }
+
+    private void moveCube(String direction) {
+        direction = direction.toUpperCase();
+        switch (direction) {
+            case "F":
+                printer.printCube(Move.front());
+                break;
         }
     }
 
