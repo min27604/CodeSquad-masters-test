@@ -1,3 +1,5 @@
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 
 public class Cube {
@@ -11,10 +13,13 @@ public class Cube {
     int counter;
 
     void start() {
+        Instant start = Instant.now();
         printer.printCube(cube);
         while (true) {
             takeInputs();
             if (input.equals("Q")) {
+                Instant end = Instant.now();
+                Timer.printTimeElapsed(start, end);
                 System.out.println("조작갯수: " + counter);
                 System.out.println("이용해주셔서 감사합니다. 뚜뚜뚜.");
                 break;
