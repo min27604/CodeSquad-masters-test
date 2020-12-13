@@ -2,14 +2,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class Shuffle {
+class Shuffle {
     static String[] cubeElements = {"W", "W", "W", "W", "W", "W", "W", "W", "W",
             "O", "O", "O", "O", "O", "O", "O", "O", "O", "G", "G", "G", "G", "G", "G", "G", "G", "G",
             "R", "R", "R", "R", "R", "R", "R", "R", "R", "B", "B", "B", "B", "B", "B", "B", "B", "B",
             "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y", "Y"};
     static String[][][] shuffledCube = new String[6][3][3];
 
-    static String[][][] shuffleCube() {
+    static void setShuffledCube() {
         List<String> potentialCubeElements = Arrays.asList(cubeElements);
         Collections.shuffle(potentialCubeElements);
 
@@ -22,6 +22,5 @@ public class Shuffle {
                 }
             }
         }
-        return shuffledCube;
     }
 }

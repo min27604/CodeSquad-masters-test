@@ -1,7 +1,7 @@
 import java.time.Duration;
 import java.time.Instant;
 
-public class Timer {
+class Timer {
     static void printTimeElapsed(Instant start, Instant end) {
         long timeElapsed = Duration.between(start, end).toMillis();
         long minutes = (timeElapsed / 1000) / 60;

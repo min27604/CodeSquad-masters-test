@@ -1,8 +1,7 @@
-import java.time.Duration;
 import java.time.Instant;
 import java.util.Scanner;
 
-public class Cube {
+class Cube {
     String[][][] cube = new String[][][] {{{"W", "W", "W"}, {"W", "W", "W"}, {"W", "W", "W"}},
             {{"O", "O", "O"}, {"O", "O", "O"}, {"O", "O", "O"}}, {{"G", "G", "G"}, {"G", "G", "G"}, {"G", "G", "G"}},
             {{"R", "R", "R"}, {"R", "R", "R"}, {"R", "R", "R"}}, {{"B", "B", "B"}, {"B", "B", "B"}, {"B", "B", "B"}},
@@ -34,8 +33,8 @@ public class Cube {
         }
     }
 
-    void shuffle() {
-        Shuffle.shuffleCube();
+    private void shuffle() {
+        Shuffle.setShuffledCube();
         for (int i = 0; i < cube.length; i++) {
             for (int j = 0; j < cube[i].length; j++) {
                 for (int k = 0; k < cube[i][j].length; k++) {
@@ -68,6 +67,25 @@ public class Cube {
             moveCube(direction);
             counter++;
         }
+    }
+
+    private String specifyReverse(String input, int i) {
+        String tempDirection = "" + input.charAt(i);
+        if ((i != input.length() - 1) && (input.charAt(i + 1) == '\'')) {
+            tempDirection += input.charAt(i + 1);
+        }
+        return tempDirection;
+    }
+
+    private String specifyDoubleTurn(String input, int i) {
+        String tempDirection = "";
+        if (input.charAt(i - 1) == '\'') {
+            tempDirection += input.charAt(i - 2);
+            tempDirection += input.charAt(i - 1);
+        } else {
+            tempDirection += input.charAt(i - 1);
+        }
+        return tempDirection;
     }
 
     private void moveCube(String direction) {
@@ -110,24 +128,5 @@ public class Cube {
                 printer.printCube(Move.downReverse());
                 break;
         }
-    }
-
-    private String specifyReverse(String input, int i) {
-        String tempDirection = "" + input.charAt(i);
-        if ((i != input.length() - 1) && (input.charAt(i + 1) == '\'')) {
-            tempDirection += input.charAt(i + 1);
-        }
-        return tempDirection;
-    }
-
-    private String specifyDoubleTurn(String input, int i) {
-        String tempDirection = "";
-        if (input.charAt(i - 1) == '\'') {
-            tempDirection += input.charAt(i - 2);
-            tempDirection += input.charAt(i - 1);
-        } else {
-            tempDirection += input.charAt(i - 1);
-        }
-        return tempDirection;
     }
 }

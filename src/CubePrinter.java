@@ -1,12 +1,12 @@
 public class CubePrinter {
 
     void printCube(String[][][] cube) {
-        printUp(cube);
+        printTop(cube);
         printMiddle(cube);
-        printDown(cube);
+        printBottom(cube);
     }
 
-    private void printUp(String[][][] cube) {
+    private void printTop(String[][][] cube) {
         for (int i = 0; i < cube[0].length; i++) {
             System.out.print("\t\t");
             for (int j = 0; j < cube[0][i].length; j++) {
@@ -34,7 +34,7 @@ public class CubePrinter {
         }
     }
 
-    private void printDown(String[][][] cube) {
+    private void printBottom(String[][][] cube) {
         for (int i = 0; i < cube[cube.length - 1].length; i++) {
             System.out.print("\t\t");
             for (int j = 0; j < cube[cube.length - 1][i].length; j++) {
