@@ -1,62 +1,82 @@
-## Step 2
+## Step 3
+---
+### 루빅스 큐브 구현하기
+__구현 기능__
+- [x] 큐브는 W, B, G, Y, O, R의 6가지 색깔을 가지고 있다.
+- [x] 입력: 각 조작법을 한 줄로 입력받는다.
+- [x] 출력: 큐브의 6면을 펼친 상태로 출력한다.
+- [x] Q를 입력받으면 프로그램을 종료하고, 조작 받은 명령의 갯수를 출력시킨다.
 
-1. 큐브를 출력해 줄 printCube 메소드
-    - 큐브는 더블 어레이를 사용, 이중 for loop을 이용해 윗줄부터 차례대로 출력해준다.
-2. takeInputs 메소드에서 스캐너를 이용해 인풋을 저장한다. 인풋이 "Q" 라면 init 메소드에서 걸러져 프로그램이 종료된다.
-3. 저장된 인풋에 따라 방향을 정하고 큐브를 움직여준다(moveCube)
-    - input을 한 글자씩 떼어내 direction에 저장한다. 떼어낸 자리 다음 자리값에 작은 따옴표가 있다면 이것도 같이 direction에 저장한다.
+__추가 구현 기능__
+- [x] 프로그램 종료 시 경과 시간 출력
+- [x] 큐브의 무작위 섞기 기능
+- [ ] 모든 면을 맞추면 축하 메시지와 함께 프로그램을 자동 종료
 
-    ```
-    String direction = "";
-    if (inputs.charAt(i) == '\'') {
-        continue;
-    }
-    direction += inputs.charAt(i);
+---
+1. Main class의 메인 메소드에서 Cube 인스턴스를 생성, start 메소드 실행
+2. Cube.start 메소드가 실행되면 먼저 초기 상태의 큐브가 형싱게 맞게 출력
+3. 입력을 받고 입력을 하나씩 나눠주는 getDirection 메소드 실행
+4. 나눠진 방향을 받아 Move class 안의 메소드에 따라 큐브를 움직여준다
 
-    if ((i != inputs.length() - 1) && (inputs.charAt(i + 1) == '\'')) {
-        direction += "'";
-    }
-    ```
+#### Main class
+- Cube class 인스턴스를 생성, 실행시킨다
 
-    - 해당 direction을 먼저 한 번 출력해 준 다음 matchDirection에 넣어 주어진 방향대로 움직여 줄 메소드를 매치시켜준다.
+#### Cube class
+- 전반적인 프로그램 실행 메소드를 가지고있고 메인 클래스를 제외한 다른 클래스들의 메소드를 실행시켜 큐브에 적용한다
+- start()
+    - 게임의 실행을 맡는 메소드. 입력을 받고 입력에 따른 적절한 메소드를 게임 종료 입력문을 받을때까지 실행시켜준다.
+- getDirection()
+    - String으로 저장된 입력을 한 자씩 떼어 비교하고 direction에 저장
+    - specifyDoubleTurn(): 비교하는 값이 2일 때, 인덱스 - 1 자리의 값이 작은 따옴표면 (인덱스 - 2)와 (인덱스 - 1)까지 direction에 저장. 에를 들어 인풋이 U2라면 먼저 direction에 U를 저장, 다음 턴(인덱스 값이 2를 가르킬 때) 인덱스 - 1인 U를 direction에 저장
+    - specifyReverse(): 비교하는 인덱스 + 1이 작은 따옴표인지 체크, 맞으면 인덱스와 인덱스 + 1 값 모두 direction에 저장
+    - moveCube(): direction값을 스위치문에 넣어 Move class의 알맞은 메소드를 실행시켜 큐브를 움직여준다. 
 
-    ```
-    switch (direction) {
-        case "U":
-            moveLeft(0);
-            break;
-        case "U'":
-            moveRight(0);
-            break;
-        case "R":
-            moveUp(2);
-            break;
-        case "R'":
-            moveDown(2);
-            break;
-        case "L":
-            moveDown(0);
-            break;
-        case "L'":
-            moveUp(0);
-            break;
-        case "B":
-            moveRight(2);
-            break;
-        case "B'":
-            moveLeft(2);
-            break;
-    }
-    ```
+#### CubePrinter class
+- 큐브를 형식에 맞게 출력해준다
+- printTop(), printBottom(): 큐브의 첫 사이드와 마지막 사이드(cube[0], cube[cube.length - 1])를 출력
+- printMiddle(): 큐브의 첫 사이드와 마지막 사이드를 제외한 모든 면을 출력시켜준다. 한 줄에 간격을 두고 모든 면의 구성요소를 세 개씩 출력해줘야 한다.
 
-    - 큐브를 움직여주는 메소드의 예
+#### Move class
+- 방향에 따라 큐브 조각들을 알맞게 움직여준다.
+- setTempCube(): 기존에 저장된 큐브 값을 복사해서 tempCube에 저장한다.
+- setCbCube(): 방향에 따라 움직여진 큐브 값이 저장된 tempCube의 값을 다시 cb.Cube에 저장한다.후
+- rotateClockwise(): 돌려지는 면을 시계방향으로 돌려준다.
+- rotateCounterClockwise(): 돌려지는 면을 반시계방향으로 돌려준다.
+- 방향대로 큐브를 움직여주는 메소드는 로직이 같으므로 front()를 예를 들어 설명하자면 front()는 큐브의 앞면을 시계방향으로 돌려준다. 앞면(cube[2])과 접촉하는 네 사이드 면(cube[0] 아래줄 - 앞면의 윗줄과 접면, cube[1] 오른쪽 줄 - 앞면의 왼쪽 줄과 접면, cube[5] 윗줄 - 앞면의 아래줄과 접면, cube[3] 왼쪽 줄 - 앞면의 오른쪽 줄과 접면)을 모두 서로 rotate 해주고 = 돌려지는 면인 앞면(cube[2])도 마찬가지로 시계방향으로 돌려준다.
 
-    ```
-    private void moveLeft(int index) {
-        String temp = cube[index][0];
-        for (int i = 0; i < cube[index].length - 1; i++) {
-            cube[index][i] = cube[index][i + 1];
-        }
-        cube[index][cube[index].length - 1] = temp;
-    }
-    ```
+초기 화면
+```
+           0 0 0  
+           0 0 0
+           0 0 0
+
+ 1 1 1     2 2 2     3 3 3     4 4 4 
+ 1 1 1     2 2 2     3 3 3     4 4 4 
+ 1 1 1     2 2 2     3 3 3     4 4 4
+ 
+           5 5 5
+           5 5 5 
+           5 5 5 
+```
+front()를 실행시킨 
+```
+           0 0 0  
+           0 0 0
+           1 1 1
+
+ 1 1 5     2 2 2     0 3 3     4 4 4 
+ 1 1 5     2 2 2     0 3 3     4 4 4 
+ 1 1 5     2 2 2     0 3 3     4 4 4
+ 
+           3 3 3
+           5 5 5 
+           5 5 5 
+```
+
+#### Shuffle class
+- 큐브에 들어갈 요소가 하나씩 들어간 cubeElement와 랜덤으로 섞여진 큐브값을 가지게 될 shuffledCube를 가진다.
+- cubeElement를 리스트인 potentialCubeElement에 저장하고 메소드를 활용해 랜덤으로 섞어준다.
+- 섞여진 요소를 하나씩 shuffledCube에 넣어준다.
+
+#### Timer class
+- Cube 클래스 안의 start 메소드의 실행과 동시에 저장된 Instant start와 종료될 때 저장되는 Instant end를 받아 둘 사이의 차를 구해 밀리세컨으로 저장, 알맞은 포맷으로 출력해준다.
