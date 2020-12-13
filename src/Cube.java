@@ -91,42 +91,18 @@ class Cube {
     private void moveCube(String direction) {
         direction = direction.toUpperCase();
         switch (direction) {
-            case "F":
-                printer.printCube(Move.front());
-                break;
-            case "F'":
-                printer.printCube(Move.frontReverse());
-                break;
-            case "R":
-                printer.printCube(Move.right());
-                break;
-            case "R'":
-                printer.printCube(Move.rightReverse());
-                break;
-            case "U":
-                printer.printCube(Move.up());
-                break;
-            case "U'":
-                printer.printCube(Move.upReverse());
-                break;
-            case "B":
-                printer.printCube(Move.back());
-                break;
-            case "B'":
-                printer.printCube(Move.backReverse());
-                break;
-            case "L":
-                printer.printCube(Move.left());
-                break;
-            case "L'":
-                printer.printCube(Move.leftReverse());
-                break;
-            case "D":
-                printer.printCube(Move.down());
-                break;
-            case "D'":
-                printer.printCube(Move.downReverse());
-                break;
+            case "F": printer.printCube(Move.front()); break;
+            case "F'": printer.printCube(Move.frontReverse()); break;
+            case "R": printer.printCube(Move.right()); break;
+            case "R'": printer.printCube(Move.rightReverse()); break;
+            case "U": printer.printCube(Move.up()); break;
+            case "U'": printer.printCube(Move.upReverse()); break;
+            case "B": printer.printCube(Move.back()); break;
+            case "B'": printer.printCube(Move.backReverse()); break;
+            case "L": printer.printCube(Move.left()); break;
+            case "L'": printer.printCube(Move.leftReverse()); break;
+            case "D": printer.printCube(Move.down()); break;
+            case "D'": printer.printCube(Move.downReverse()); break;
         }
     }
 }
